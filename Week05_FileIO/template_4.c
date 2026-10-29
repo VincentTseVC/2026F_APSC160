@@ -1,0 +1,46 @@
+/*
+Input file:
+R C
+a1 b1 c1 d1 e1 f1 g1 h1 i1 j1 k1
+a2 b2 c2 d2 e2 f2 g2 h2 i2 j2 k2
+a3 b3 c3 d3 e3 f3 g3 h3 i3 j3 k3
+.
+.
+.
+*/
+
+#include <stdio.h>
+
+#define FILE_NAME "example1.dat"
+
+int main() {
+    FILE *inFile;
+
+    inFile = fopen(FILE_NAME, "r");
+    if (!inFile) {
+        printf("failed to open\n.");
+        return 0;
+    }
+
+    int row, col;
+    fscanf(inFile, "%d %d", &row, &col);
+
+
+    int num;
+
+    int r = 0;
+    while (r < row) {
+
+        int c = 0;
+        while (c < col) {
+            fscanf(inFile, "%d", &num);
+            // ...
+            c++;
+        }
+
+        r++;
+    }
+
+    fclose(inFile);
+    return 0;
+}
