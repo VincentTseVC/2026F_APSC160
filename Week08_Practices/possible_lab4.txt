@@ -1,0 +1,27 @@
+n = 3
+@
+@@
+@@@
+o
+oo
+@
+
+
+printChar() {
+    ...
+    while ..
+}
+
+main() {
+    row = 1
+    while row <= n
+        printChar(row, '@')
+        row++
+
+    row = 1
+    while row < n
+        printChar(row, 'o')
+        row++
+
+    printChar(1, '@')
+}

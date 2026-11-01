@@ -72,11 +72,29 @@ int main() {
     // j =   0  1  2  3  4
     };
 
+
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 5; j++) {
             printf("%d ", M[i][j]);
         }
         printf("\n");
     }
+    // 1 2 3 4 5
+    // 9 8 7 6 5
+    // 1 2 5 2 4
+
+
+    for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < 3; i++) {
+            printf("%d ", M[i][j]);
+        }
+        printf("\n");
+    }
+    // 1 9 1
+    // 2 8 3
+    // 3 7 5
+    // 4 6 2
+    // 5 5 4
+
 
 }

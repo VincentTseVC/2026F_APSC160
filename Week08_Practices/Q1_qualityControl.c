@@ -54,7 +54,21 @@ int main( void ) {
  * Param: inFile - points to file containing ball bearing data
  */
 void doQualityControl( FILE* inFile ) {
+    double diameter;
+    double weight;
 
+    int countAccept = 0;
+    int countReject = 0;
+
+    while (fscanf(inFile, "%lf %lf", &diameter, &weight) == 2) {
+        if (diameter > MIN_DIAM && diameter < MAX_DIAM) {
+            countAccept++;
+        } else {
+            countReject++;
+        }
+    }
+
+    printReport(countAccept, countReject);
 }
 
 /*
@@ -65,5 +79,7 @@ void doQualityControl( FILE* inFile ) {
  * Param: numReject - number of ball bearings that are rejected
  */
 void printReport( int numAccept, int numReject ) {
-
+    int total = numAccept + numReject;
+    printf("Percentage accepted: %.1lf\n", numAccept / (double) total);
+    printf("Percentage rejected: %.1lf\n", numReject / (double) total);
 }

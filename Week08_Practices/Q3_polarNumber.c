@@ -22,3 +22,47 @@ look like the following:
                     95.12 + j 948.83
 
 */
+#include <stdio.h>
+#include <math.h>
+
+#define INPUTFILE  "fun_coding.dat"
+#define OUTPUTFILE "my_answer.dat"
+
+int main() {
+    FILE *inFile;
+    FILE *outFile;
+
+    int A;
+    int theta;
+
+    double X;
+    double Y;
+
+    int wtf1, wtf3;
+    double wtf2;
+
+    inFile = fopen(INPUTFILE, "r");
+    if (inFile == NULL) {
+        printf("Error: opening inFile.\n");
+    } else {
+        outFile = fopen(OUTPUTFILE, "w");
+        if (outFile == NULL) {
+            printf("Error: opening outFile\n");
+        } else {
+
+            fprintf(outFile, "    X + j Y\n");
+
+            while (fscanf(inFile, "%d %d %lf %lf %d", &wtf1, &A, &wtf2, &theta, &wtf3) == 5) {
+                X = A * cos(theta);
+                Y = A * sin(theta);
+                fprintf(outFile, "%5lf + j %.2lf\n", X, Y);
+            }
+
+            fclose(outFile);
+        }
+
+        fclose(inFile);
+    }
+
+    return 0;
+}

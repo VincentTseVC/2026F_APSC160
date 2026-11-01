@@ -83,11 +83,11 @@ int main( void ) {
     for( qNum = 1; qNum <= NUM_QUESITONS; qNum++ ) {
         //generate and display question
 
-        correctAnswer = /* TODO: replace with your own code. */
+        correctAnswer = generateQuestion(qNum);
 
         // Respond to user getting answer right or running out of attempts
 
-        if( /* TODO: replace with your own code. */ ) {
+        if( processUserAnswers(correctAnswer) ) {
             printf( "Correct!\n\n" );
             numCorrect++;
         }
@@ -118,7 +118,21 @@ int getRandomOperand( void ) {
  * Return: answer to question
  */
 int generateQuestion( int qNum ){
+    //                    0    1    2
+    char operators[] = { '+', '-', '*' };
+    char operator = operators[rand() % NUM_OPERATORS];
+    int operand1 = getRandomOperand();
+    int operand2 = getRandomOperand();
+    int answer;
+    if (operator == '+') answer = operand1 + operand2;
+    if (operator == '-') answer = operand1 - operand2;
+    if (operator == '*') answer = operand1 * operand2;
 
+    // Question #2:
+    // 4 - 3 = ?
+    printf("Question #%d: \n", qNum);
+    printf("%d %c %d = ?\n\n", operand1, operator, operand2);
+    return answer;
 }
 
 
@@ -131,7 +145,12 @@ int generateQuestion( int qNum ){
  * Returns: user’s answer to question
  */
 int getUserAnswer( int attemptsRemaining ){
-
+    // You have 3 attempts remaining.  Enter your answer...
+    // 24
+    int answer;
+    printf("You have %d attempts remaining.  Enter your answer...\n", attemptsRemaining);
+    scanf("%d", &answer);
+    return answer;
 }
 
 
@@ -143,5 +162,28 @@ int getUserAnswer( int attemptsRemaining ){
  *         attempts, FALSE otherwise.
  */
 int processUserAnswers( int correctAnswer ){
+    // You have 3 attempts remaining.  Enter your answer...
+    // 24
+    // Your answer is not correct.
+    // You have 2 attempts remaining.  Enter your answer...
+    // 7
+    // Your answer is not correct.
+    // You have 1 attempts remaining.  Enter your answer...
+    // 4
 
+    int userAnswer;
+    int attempted = 0;
+
+
+    userAnswer = getUserAnswer(MAX_ATTEMPTS - attempted);
+    attempted++;
+
+    while (userAnswer != correctAnswer && attempted < MAX_ATTEMPTS) {
+        printf("Your answer is not correct.\n");
+        userAnswer = getUserAnswer(MAX_ATTEMPTS - attempted);
+        attempted++;
+    }
+
+
+    return userAnswer == correctAnswer;
 }
